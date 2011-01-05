@@ -1,0 +1,11 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Oman Util
+Bundle-SymbolicName: org.omancode.util
+Bundle-Version: 1.0.0.qualifier
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Import-Package: org.apache.commons.io,
+ org.apache.commons.lang
+Export-Package: org.omancode.util,
+ org.omancode.util.io,
+ org.omancode.util.swing
