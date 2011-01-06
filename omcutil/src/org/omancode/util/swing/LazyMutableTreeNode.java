@@ -22,6 +22,9 @@ import javax.swing.tree.DefaultTreeModel;
  * expanded level of the hierarchy.
  * 
  * Adapted from com.jidesoft.plaf.basic.LazyMutableTreeNode.
+ * 
+ * @author Oliver Mannion
+ * @version $Revision$
  */
 public abstract class LazyMutableTreeNode extends DefaultMutableTreeNode {
 

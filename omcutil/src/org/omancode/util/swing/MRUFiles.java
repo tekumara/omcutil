@@ -14,7 +14,6 @@ import javax.swing.event.ListDataListener;
 import org.apache.commons.lang.StringUtils;
 import org.omancode.util.MRUSet;
 
-
 /**
  * Provide a menu of MRU files and loading/saving the file list from
  * {@link Preferences}.
@@ -48,8 +47,8 @@ public class MRUFiles implements ListDataListener {
 	 * @throws IOException
 	 *             if problem with filenames in the MRU string
 	 */
-	public MRUFiles(Processor processor, Preferences prefs,
-			String mruPrefsKey, int mruSize) throws IOException {
+	public MRUFiles(Processor processor, Preferences prefs, String mruPrefsKey,
+			int mruSize) throws IOException {
 		this.processor = processor;
 		this.prefs = prefs;
 		this.mruPrefsKey = mruPrefsKey;
@@ -66,8 +65,8 @@ public class MRUFiles implements ListDataListener {
 	 * @throws IOException
 	 *             if problem creating mru set
 	 */
-	private MRUSet<Action> createMRUSet(Preferences prefs,
-			String mruPrefsKey, int mruSize) throws IOException {
+	private MRUSet<Action> createMRUSet(Preferences prefs, String mruPrefsKey,
+			int mruSize) throws IOException {
 		String mruFileNames = prefs.get(mruPrefsKey, "");
 		MRUSet<Action> set = new MRUSet<Action>(mruSize);
 
@@ -106,8 +105,7 @@ public class MRUFiles implements ListDataListener {
 	 */
 	private MRUSet<Action> fillFromString(MRUSet<Action> set,
 			String mruFileNames) throws IOException {
-		String[] fileNames =
-				StringUtils.split(mruFileNames, MRUSet.SEPARATOR);
+		String[] fileNames = StringUtils.split(mruFileNames, MRUSet.SEPARATOR);
 
 		for (String name : fileNames) {
 			String fileName = name.trim();
@@ -146,7 +144,7 @@ public class MRUFiles implements ListDataListener {
 	private class FileAction extends AbstractAction {
 
 		private static final long serialVersionUID = 5624801757859910898L;
-		
+
 		private final File file;
 		private final String filePath;
 
