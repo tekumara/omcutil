@@ -19,7 +19,7 @@ import org.omancode.util.MRUSet;
  * {@link Preferences}.
  * 
  * @author Oliver Mannion
- * @version $Revision: 64
+ * @version $Revision$
  */
 public class MRUFiles implements ListDataListener {
 
