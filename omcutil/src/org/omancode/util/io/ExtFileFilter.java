@@ -42,8 +42,6 @@ package org.omancode.util.io;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Enumeration;
-import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.List;
 
@@ -63,9 +61,9 @@ import javax.swing.filechooser.FileFilter;
  * ExtFileFilter( new String{"gif", "jpg"}, "JPEG & GIF Images")
  * chooser.addChoosableFileFilter(filter); chooser.showOpenDialog(this);
  * 
- * @version 1.18 06/01/11 Oliver Mannion replaced Hashtable with List and
- *          Enumeration with Iterator
- * @version 1.17 09/08/10 Oliver Mannion
+ * @version $Revision$ 06/01/11 Oliver Mannion <br>
+ *          replaced Hashtable with List and Enumeration with Iterator
+ * @version 09/08/10 Oliver Mannion
  *          <ul>
  *          <li>renamed from ExampleFileFilter to ExtFileFilter
  *          <li>removed unused fields
@@ -73,7 +71,7 @@ import javax.swing.filechooser.FileFilter;
  *          during construction)
  *          </ul>
  * @version 1.16 07/26/04 Jeff Dinkins
- * @author Jeff Dinkins
+ * @author Jeff Dinkins, Oliver Mannion
  */
 public class ExtFileFilter extends FileFilter {
 
