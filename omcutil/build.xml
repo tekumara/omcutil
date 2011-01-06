@@ -1,0 +1,48 @@
+<?xml version="1.0" ?>
+<project name="omcutil" default="compile" xmlns:ivy="antlib:org.apache.ivy.ant">
+	<property name="target" value="1.6" />
+	<property name="source" value="1.6" />
+	<property name="src.dir" location="src" />
+	<property name="ivy.lib.dir" location="build/lib" />
+	<property name="class.dir" location="build/bin" />
+	<property name="doc.dir" location="doc" />
+	
+	<property name="javac.debug" value="on" />
+
+	<path id="build.classpath">
+		<!-- all jars in the lib dir -->
+		<fileset dir="${ivy.lib.dir}">
+			<include name="**/*.jar" />
+		</fileset>
+	</path>
+
+	<target name="resolve" description="resolve dependencies">
+		<!-- do a retrieve to ivy.lib.dir -->
+		<ivy:retrieve conf="master" />
+	</target>
+
+	<target name="init" depends="clean">
+		<mkdir dir="${class.dir}" />
+		<copy includeemptydirs="false" todir="${class.dir}">
+			<fileset dir="${src.dir}">
+				<exclude name="**/*.launch" />
+				<exclude name="**/*.java" />
+			</fileset>
+		</copy>
+	</target>
+
+	<target name="clean">
+		<delete dir="${class.dir}" />
+	</target>
+
+	<target name="compile" depends="init,resolve">
+		<javac srcdir="${src.dir}" debug="${javac.debug}" destdir="${class.dir}" includeantruntime="false" source="${source}" target="${target}" classpathref="build.classpath">
+			<compilerarg value="-Xlint" />
+		</javac>
+	</target>
+	
+	<target name="javadoc" description="Generate JavaDocs">
+		<javadoc sourcepath="${src.dir}" destdir="${doc.dir}" author="true" version="true" use="true" classpathref="build.classpath"/>
+	</target>
+
+</project>

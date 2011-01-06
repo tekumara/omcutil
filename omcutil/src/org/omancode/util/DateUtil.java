@@ -15,13 +15,20 @@ public final class DateUtil {
 	/**
 	 * Unique sortable date formatter.
 	 */
-	private static final SimpleDateFormat UNIQUE_SORTABLE =
-			new SimpleDateFormat("yyyyMMdd-HHmmss", Locale.getDefault());
+	private static final SimpleDateFormat UNIQUE_SORTABLE = new SimpleDateFormat(
+			"yyyyMMdd-HHmmss", Locale.getDefault());
 
 	private DateUtil() {
 		// no instantiation
 	}
 
+	/**
+	 * Converts current date time to a unique date time string in sortable
+	 * order. i.e: yyyyMMdd-HHmmss.
+	 * 
+	 * @see #toUniqueSortableString(Date)
+	 * @return unique sortable string representation of current date/time.
+	 */
 	public static String nowToSortableUniqueDateString() {
 		return toUniqueSortableString(new Date());
 	}

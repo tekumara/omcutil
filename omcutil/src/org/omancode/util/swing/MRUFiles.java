@@ -145,6 +145,8 @@ public class MRUFiles implements ListDataListener {
 	 */
 	private class FileAction extends AbstractAction {
 
+		private static final long serialVersionUID = 5624801757859910898L;
+		
 		private final File file;
 		private final String filePath;
 

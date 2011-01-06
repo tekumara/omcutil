@@ -41,8 +41,11 @@
 package org.omancode.util.io;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.Hashtable;
+import java.util.Iterator;
+import java.util.List;
 
 import javax.swing.filechooser.FileFilter;
 
@@ -60,7 +63,9 @@ import javax.swing.filechooser.FileFilter;
  * ExtFileFilter( new String{"gif", "jpg"}, "JPEG & GIF Images")
  * chooser.addChoosableFileFilter(filter); chooser.showOpenDialog(this);
  * 
- * @version 1.17 09/08/04 Oliver Mannion
+ * @version 1.18 06/01/11 Oliver Mannion replaced Hashtable with List and
+ *          Enumeration with Iterator
+ * @version 1.17 09/08/10 Oliver Mannion
  *          <ul>
  *          <li>renamed from ExampleFileFilter to ExtFileFilter
  *          <li>removed unused fields
@@ -72,7 +77,7 @@ import javax.swing.filechooser.FileFilter;
  */
 public class ExtFileFilter extends FileFilter {
 
-	private Hashtable filters = null;
+	private List<String> filters = null;
 	private String description = null;
 	private String fullDescription = null;
 	private boolean useExtensionsInDescription = true;
@@ -84,7 +89,7 @@ public class ExtFileFilter extends FileFilter {
 	 * @see #addExtension
 	 */
 	public ExtFileFilter() {
-		this.filters = new Hashtable();
+		this.filters = new ArrayList<String>(1);
 	}
 
 	/**
@@ -163,7 +168,7 @@ public class ExtFileFilter extends FileFilter {
 				return true;
 			}
 			String extension = getExtension(f);
-			if (extension != null && filters.get(getExtension(f)) != null) {
+			if (extension != null && filters.contains(getExtension(f))) {
 				return true;
 			}
 		}
@@ -200,10 +205,7 @@ public class ExtFileFilter extends FileFilter {
 	 * Note that the "." before the extension is not needed and will be ignored.
 	 */
 	public final void addExtension(String extension) {
-		if (filters == null) {
-			filters = new Hashtable(5);
-		}
-		filters.put(extension.toLowerCase(), this);
+		filters.add(extension.toLowerCase());
 		fullDescription = null;
 	}
 
@@ -223,12 +225,11 @@ public class ExtFileFilter extends FileFilter {
 				fullDescription = description == null ? "(" : description
 						+ " (";
 				// build the description from the extension list
-				Enumeration extensions = filters.keys();
+				Iterator<String> extensions = filters.iterator();
 				if (extensions != null) {
-					fullDescription += "." + (String) extensions.nextElement();
-					while (extensions.hasMoreElements()) {
-						fullDescription += ", ."
-								+ (String) extensions.nextElement();
+					fullDescription += "." + extensions.next();
+					while (extensions.hasNext()) {
+						fullDescription += ", ." + extensions.next();
 					}
 				}
 				fullDescription += ")";

@@ -192,6 +192,7 @@ public class JTableExcelStyleEdit extends JTable {
 	 * @param columnNames
 	 *            names of each column
 	 */
+	@SuppressWarnings("serial")
 	public JTableExcelStyleEdit(final Object[][] rowData,
 			final Object[] columnNames) {
 		this(new AbstractTableModel() {
