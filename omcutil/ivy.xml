@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ivy-module version="2.0">
 
-	<info organisation="org.omancode" module="omcutil" revision="1.0" status="release">
+	<info organisation="org.omancode" module="omcutil" revision="${version}" status="release">
 		<license name="LGPL" url="http://www.gnu.org/licenses/lgpl.html" />
 		<description homepage="http://code.google.com/p/jamsim/">
 		</description>
@@ -13,7 +13,6 @@
 		<conf name="sources" visibility="public" description="source artifacts of this module and its dependencies"/>
 		<conf name="javadoc" visibility="public" description="javadoc artifacts of this module and its dependencies"/>
 	</configurations>
-
 
 	<publications>
 		<artifact conf="master"/>

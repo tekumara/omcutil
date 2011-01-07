@@ -3,10 +3,16 @@
 	<property name="target" value="1.6" />
 	<property name="source" value="1.6" />
 	<property name="src.dir" location="src" />
-	<property name="ivy.lib.dir" location="build/lib" />
-	<property name="class.dir" location="build/bin" />
+	<property name="build.dir" location="build" />
+	<property name="dist.dir" location="${build.dir}" />
+	<property name="ivy.lib.dir" location="${build.dir}/lib" />
+	<property name="class.dir" location="${build.dir}/bin" />
 	<property name="doc.dir" location="doc" />
-	
+	<property name="ivyreport.dir" location="${doc.dir}/dependencies" />
+
+	<!-- load ${version} from build.properties file -->
+	<property file="build.properties" />
+
 	<property name="javac.debug" value="on" />
 
 	<path id="build.classpath">
@@ -19,6 +25,9 @@
 	<target name="resolve" description="resolve dependencies">
 		<!-- do a retrieve to ivy.lib.dir -->
 		<ivy:retrieve conf="master" />
+
+		<!-- save report to doc.dir -->
+		<ivy:report conf="master" graph="false" todir="${ivyreport.dir}" />
 	</target>
 
 	<target name="init" depends="clean">
@@ -32,7 +41,7 @@
 	</target>
 
 	<target name="clean">
-		<delete dir="${class.dir}" />
+		<delete dir="${build.dir}" />
 	</target>
 
 	<target name="compile" depends="init,resolve">
@@ -40,9 +49,30 @@
 			<compilerarg value="-Xlint" />
 		</javac>
 	</target>
-	
+
 	<target name="javadoc" description="Generate JavaDocs">
-		<javadoc sourcepath="${src.dir}" destdir="${doc.dir}" author="true" version="true" use="true" classpathref="build.classpath"/>
+		<javadoc sourcepath="${src.dir}" destdir="${doc.dir}" author="true" version="true" use="true" classpathref="build.classpath" />
 	</target>
+
+	<target name="package" depends="compile, javadoc" description="Generate JAR files">
+		<mkdir dir="${dist.dir}" />
+		<jar destfile="${dist.dir}/${ant.project.name}-${version}.jar" basedir="${class.dir}" />
+		<jar destfile="${dist.dir}/${ant.project.name}-javadoc-${version}.jar" basedir="${doc.dir}" />
+		<jar destfile="${dist.dir}/${ant.project.name}-sources-${version}.jar" basedir="${src.dir}" />
+		<zip destfile="${dist.dir}/${ant.project.name}-${version}-all-plus-deps.zip" basedir="${dist.dir}">
+			<include name="*.jar" />
+			<zipfileset dir="${ivy.lib.dir}" prefix="lib" />
+		</zip>
+	</target>
+
+	<target name="publish" description="Publish JARs to local ivy repository">
+		<!-- do a resolve first. this places our ivy.xml in the cache -->
+		<ivy:resolve />
+		<!-- delete the resolved/delivered ivy.xml file from previous publications 
+        	 this will be regenerated in the deliver performed by the publish -->
+		<delete file="${dist.dir}/ivy.xml" />
+		<ivy:publish artifactspattern="${dist.dir}/[artifact](-[classifier])-${version}.[ext]" status="release" overwrite="true" resolver="local" />
+	</target>
+
 
 </project>
