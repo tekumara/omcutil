@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ivy-module version="2.0">
 
-	<info organisation="org.omancode" module="omcutil" revision="${version}" status="release">
+	<info organisation="org.omancode" module="${name}" revision="${version}" status="release">
 		<license name="LGPL" url="http://www.gnu.org/licenses/lgpl.html" />
-		<description homepage="http://code.google.com/p/jamsim/">
+		<description homepage="http://code.google.com/p/omcutil/">
 		</description>
 	</info>
 
@@ -16,8 +16,8 @@
 
 	<publications>
 		<artifact conf="master"/>
-		<artifact name="omcUtil-sources" type="source" conf="sources" ext="jar" />
-		<artifact name="omcUtil-javadoc" type="javadoc" conf="javadoc" ext="jar" />
+		<artifact name="${name}-sources" type="source" conf="sources" ext="jar" />
+		<artifact name="${name}-javadoc" type="javadoc" conf="javadoc" ext="jar" />
 	</publications>
 
 	<dependencies>
