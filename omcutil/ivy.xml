@@ -23,5 +23,8 @@
 	<dependencies>
         <dependency org="commons-lang" name="commons-lang" rev="latest.integration" conf="*->@"/>
         <dependency org="commons-io" name="commons-io" rev="latest.integration" conf="*->@"/>
+        <dependency org="commons-beanutils" name="commons-beanutils" rev="latest.integration" conf="*->@">
+        	<exclude name="commons-collections"/>
+        </dependency>
     </dependencies>
 </ivy-module>

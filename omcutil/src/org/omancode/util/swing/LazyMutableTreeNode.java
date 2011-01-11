@@ -32,38 +32,40 @@ public abstract class LazyMutableTreeNode extends DefaultMutableTreeNode {
 	 * 
 	 */
 	private static final long serialVersionUID = -5234855334034342509L;
-	
+
 	private transient boolean loaded = false;
 
-    /**
-     * Creates a tree node that has no parent and no children, but which
-     * allows children.
-     */
+	/**
+	 * Creates a tree node that has no parent and no children, but which allows
+	 * children.
+	 */
 	public LazyMutableTreeNode() {
 		super();
 	}
 
-    /**
-     * Creates a tree node with no parent, no children, but which allows 
-     * children, and initializes it with the specified user object.
-     * 
-     * @param userObject an Object provided by the user that constitutes
-     *                   the node's data
-     */
+	/**
+	 * Creates a tree node with no parent, no children, but which allows
+	 * children, and initializes it with the specified user object.
+	 * 
+	 * @param userObject
+	 *            an Object provided by the user that constitutes the node's
+	 *            data
+	 */
 	public LazyMutableTreeNode(Object userObject) {
 		super(userObject);
 	}
 
-    /**
-     * Creates a tree node with no parent, no children, initialized with
-     * the specified user object, and that allows children only if
-     * specified.
-     * 
-     * @param userObject an Object provided by the user that constitutes
-     *        the node's data
-     * @param allowsChildren if true, the node is allowed to have child
-     *        nodes -- otherwise, it is always a leaf node
-     */
+	/**
+	 * Creates a tree node with no parent, no children, initialized with the
+	 * specified user object, and that allows children only if specified.
+	 * 
+	 * @param userObject
+	 *            an Object provided by the user that constitutes the node's
+	 *            data
+	 * @param allowsChildren
+	 *            if true, the node is allowed to have child nodes -- otherwise,
+	 *            it is always a leaf node
+	 */
 	public LazyMutableTreeNode(Object userObject, boolean allowsChildren) {
 		super(userObject, allowsChildren);
 	}
@@ -84,7 +86,9 @@ public abstract class LazyMutableTreeNode extends DefaultMutableTreeNode {
 	 */
 	public void clear() {
 		removeAllChildren();
-		loaded = false;
+		synchronized (this) {
+			loaded = false;
+		}
 	}
 
 	/**
