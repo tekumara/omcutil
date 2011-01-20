@@ -8,7 +8,6 @@
 	</info>
 
 	<configurations>
-		<conf name="default" visibility="public" description="all artifacts of this module and its dependencies" extends="master,sources,javadoc"/>
 		<conf name="master" visibility="public" description="binary artifacts of this module and its dependencies"/>
 		<conf name="sources" visibility="public" description="source artifacts of this module and its dependencies"/>
 		<conf name="javadoc" visibility="public" description="javadoc artifacts of this module and its dependencies"/>

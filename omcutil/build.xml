@@ -84,9 +84,10 @@
 	<target name="publish" description="Publish JARs to local ivy repository">
 		<!-- do a resolve first. this places our ivy.xml in the cache -->
 		<ivy:resolve />
-		<!-- delete the resolved/delivered ivy.xml file from previous publications 
+		<!-- delete the resolved/delivered ivy.xml file from previous publications
+			 in case we have made new changes to ivy.xml since then  
         	 this will be regenerated in the deliver performed by the publish -->
-		<delete file="${dist.dir}/ivy.xml" />
+		<delete file="${dist.dir}/ivy-${version}.xml" />
 		<ivy:publish artifactspattern="${dist.dir}/[artifact](-[classifier])-${version}.[ext]" status="release" overwrite="true" resolver="local" />
 	</target>
 
@@ -108,7 +109,8 @@
 			projectname="${name}" 
 			filename="${dist.dir}/${javadoc.jar}" 
 			targetfilename="${javadoc.jar}" 
-			summary="${name} ${version} javadoc" /> 
+			summary="${name} ${version} javadoc" 
+			labels="Type-Docs"/> 
 
 		<gcupload 
 	        username="${gc.username}" 
@@ -116,7 +118,8 @@
 			projectname="${name}" 
 			filename="${dist.dir}/${sources.jar}" 
 			targetfilename="${sources.jar}" 
-			summary="${name} ${version} sources" /> 
+			summary="${name} ${version} sources" 
+			labels="Type-Source"/> 
 
 		<gcupload 
 	        username="${gc.username}" 
