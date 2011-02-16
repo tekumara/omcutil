@@ -34,10 +34,10 @@
 
 	<target name="resolve" description="resolve dependencies">
 		<!-- do a retrieve to ivy.lib.dir -->
-		<ivy:retrieve conf="master" />
+		<ivy:retrieve conf="default" />
 
 		<!-- save report to doc.dir -->
-		<ivy:report conf="master" graph="false" todir="${ivyreport.dir}" />
+		<ivy:report conf="default" graph="false" todir="${ivyreport.dir}" />
 	</target>
 
 	<target name="clean-ivycache" description="clean the ivy cache">
@@ -91,7 +91,7 @@
 		<ivy:publish artifactspattern="${dist.dir}/[artifact](-[classifier])-${version}.[ext]" status="release" overwrite="true" resolver="local" />
 	</target>
 
-	<taskdef classname="net.bluecow.googlecode.ant.GoogleCodeUploadTask" classpath="ant/ant-googlecode-0.0.2.jar" name="gcupload" />
+	<taskdef name="gcupload" classname="net.bluecow.googlecode.ant.GoogleCodeUploadTask" classpath="ant/ant-googlecode-0.0.2.jar" />
 	<target name="gcupload" description="Upload JARS to googlecode">
 	    <property file="build.credentials.properties" />
 		<gcupload 
