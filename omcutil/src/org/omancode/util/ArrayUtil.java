@@ -85,8 +85,9 @@ public final class ArrayUtil {
 		for (int i = 0; i < length; i++) {
 			String string1 = array1[i];
 			String string2 = array2[i];
-			if (!(string1 == null ? string2 == null : caseInsensitive ? string1
-					.equalsIgnoreCase(string2) : string1.equals(string2))) {
+			if (!(string1 == null ? string2 == null
+					: caseInsensitive ? string1.equalsIgnoreCase(string2)
+							: string1.equals(string2))) {
 				return false;
 			}
 

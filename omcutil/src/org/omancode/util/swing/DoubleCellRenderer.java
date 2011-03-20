@@ -1,6 +1,5 @@
 package org.omancode.util.swing;
 
-import java.text.DecimalFormat;
 import java.text.NumberFormat;
 
 import javax.swing.table.DefaultTableCellRenderer;
@@ -38,7 +37,7 @@ public class DoubleCellRenderer extends DefaultTableCellRenderer {
 	 */
 	public DoubleCellRenderer(int numberDigitsToDisplay) {
 		formatter.setMaximumFractionDigits(numberDigitsToDisplay);
-		// setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+		setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
 	}
 
 	@Override

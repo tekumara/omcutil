@@ -19,6 +19,8 @@ import javax.swing.table.TableColumn;
  */
 public final class SwingUtil {
 
+	private static final int DEFAULT_COLUMN_MARGIN = 5;
+
 	/**
 	 * Private constructor to prevent instantiation.
 	 */
@@ -27,8 +29,9 @@ public final class SwingUtil {
 
 	/**
 	 * Resize a {@link JSplitPane} to its maximum or minimum. Silently exits
-	 * without resize if the split pane is not visible. Adapted from {@code
-	 * OneTouchActionHandler.actionPerformed} in {@link BasicSplitPaneDivider}.
+	 * without resize if the split pane is not visible. Adapted from
+	 * {@code OneTouchActionHandler.actionPerformed} in
+	 * {@link BasicSplitPaneDivider}.
 	 * 
 	 * @param toMinimum
 	 *            {@code true} indicates the resize should go the minimum (top
@@ -113,7 +116,27 @@ public final class SwingUtil {
 	/**
 	 * Pack all columns. Sets the preferred width of all columns so they will be
 	 * just wide enough to show the column head and the widest cell in the
+	 * column + a margin of 5 each side.
+	 * 
+	 * NB: If a table has more than 100 rows, then only the width of the column
+	 * header will be checked and not the widest cell value. Otherwise it could
+	 * take too long.
+	 * 
+	 * @param table
+	 *            table with columns to pack
+	 */
+	public static void packAllColumns(JTable table) {
+		packAllColumns(table, DEFAULT_COLUMN_MARGIN);
+	}
+
+	/**
+	 * Pack all columns. Sets the preferred width of all columns so they will be
+	 * just wide enough to show the column head and the widest cell in the
 	 * column + {@code margin} each side.
+	 * 
+	 * NB: If a table has more than 100 rows, then only the width of the column
+	 * header will be checked and not the widest cell value. Otherwise it could
+	 * take too long.
 	 * 
 	 * @param table
 	 *            table with columns to pack
@@ -130,9 +153,13 @@ public final class SwingUtil {
 	/**
 	 * Pack specified column. Sets the preferred width of the specified visible
 	 * column so it is will be just wide enough to show the column head and the
-	 * widest cell in the column + {@code margin} each side.
+	 * widest cell value in the column + {@code margin} each side.
 	 * 
 	 * Taken from http://www.exampledepot.com/egs/javax.swing.table/PackCol.html
+	 * 
+	 * NB: If a table has more than 100 rows, then only the width of the column
+	 * header will be checked and not the widest cell value. Otherwise it could
+	 * take too long.
 	 * 
 	 * @param table
 	 *            table with column to pack
@@ -143,6 +170,7 @@ public final class SwingUtil {
 	 *            additional width of 2*margin pixels).
 	 */
 	public static void packColumn(JTable table, int vColIndex, int margin) {
+
 		DefaultTableColumnModel colModel =
 				(DefaultTableColumnModel) table.getColumnModel();
 		TableColumn col = colModel.getColumn(vColIndex);
@@ -154,18 +182,24 @@ public final class SwingUtil {
 			renderer = table.getTableHeader().getDefaultRenderer();
 		}
 		Component comp =
-				renderer.getTableCellRendererComponent(table, col
-						.getHeaderValue(), false, false, 0, 0);
+				renderer.getTableCellRendererComponent(table,
+						col.getHeaderValue(), false, false, 0, 0);
 		width = comp.getPreferredSize().width;
 
-		// Get maximum width of column data
-		for (int r = 0; r < table.getRowCount(); r++) {
-			renderer = table.getCellRenderer(r, vColIndex);
-			comp =
-					renderer.getTableCellRendererComponent(table, table
-							.getValueAt(r, vColIndex), false, false, r,
-							vColIndex);
-			width = Math.max(width, comp.getPreferredSize().width);
+		// because checking the width of each row can be time consuming,
+		// only do so if less than 101 rows.
+		boolean checkDataWidth = (table.getRowCount() < 101);
+
+		if (checkDataWidth) {
+			// Get maximum width from all column data
+			for (int r = 0; r < table.getRowCount(); r++) {
+				renderer = table.getCellRenderer(r, vColIndex);
+				comp =
+						renderer.getTableCellRendererComponent(table,
+								table.getValueAt(r, vColIndex), false, false,
+								r, vColIndex);
+				width = Math.max(width, comp.getPreferredSize().width);
+			}
 		}
 
 		// Add margin
