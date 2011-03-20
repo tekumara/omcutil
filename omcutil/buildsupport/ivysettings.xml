@@ -1,0 +1,9 @@
+<ivysettings>
+	<include url="${ivy.default.settings.dir}/ivysettings.xml" />
+	
+	<!-- default, i.e use local, shared and public resolvers -->
+	<settings defaultResolver="default" />
+
+	<!-- make build.properties available for ivy.xml -->
+	<properties file="${ivy.basedir}/build.properties" />
+</ivysettings>
