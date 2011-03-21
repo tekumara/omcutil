@@ -6,7 +6,7 @@
 	
 	<!-- project specific javadoc properties -->
 	<presetdef name="javadoc-with-presets">
-		<javadoc overview="overview.html">
+		<javadoc overview="${src.dir}/overview.html">
 			<link href="http://java.sun.com/javase/6/docs/api/" />
 		</javadoc>
 	</presetdef>
