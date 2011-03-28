@@ -19,7 +19,7 @@ import javax.swing.filechooser.FileFilter;
  */
 public class PrefsOrSaveFileChooser {
 
-	public static final String DEFAULT_PROMPT = "Select file to save to";
+	private static final String DEFAULT_PROMPT = "Select file to save to";
 
 	private static final String SAVE_LASTDIR_KEY =
 			"save dialog last directory";

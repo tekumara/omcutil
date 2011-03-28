@@ -18,7 +18,7 @@ import javax.swing.filechooser.FileFilter;
  */
 public class PrefsOrOpenFileChooser {
 
-	public static final String DEFAULT_PROMPT = "Select file to load: ";
+	private static final String DEFAULT_PROMPT = "Select file to load: ";
 
 	private static final String OPEN_LASTDIR_KEY =
 			"open dialog last directory";
@@ -36,8 +36,7 @@ public class PrefsOrOpenFileChooser {
 	 */
 	public PrefsOrOpenFileChooser(Preferences prefs) {
 		this.prefs = prefs;
-		chooser
-				.setCurrentDirectory(new File(prefs.get(OPEN_LASTDIR_KEY, "")));
+		chooser.setCurrentDirectory(new File(prefs.get(OPEN_LASTDIR_KEY, "")));
 	}
 
 	/**
@@ -66,8 +65,7 @@ public class PrefsOrOpenFileChooser {
 	 *             if no valid file is selected when prompted.
 	 */
 	public File getFile(String prefsKey) throws IOException {
-		return getFile(prefsKey, DEFAULT_PROMPT + prefsKey, null,
-				true);
+		return getFile(prefsKey, DEFAULT_PROMPT + prefsKey, null, true);
 	}
 
 	/**
@@ -125,7 +123,7 @@ public class PrefsOrOpenFileChooser {
 	 */
 	public File getDirectory(String prefsKey, String prompt,
 			boolean saveDirSelectedToPrefs) throws IOException {
-		
+
 		int oldSelectionMode = chooser.getFileSelectionMode();
 		chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 		File file = getFile(prefsKey, prompt, null, saveDirSelectedToPrefs);
