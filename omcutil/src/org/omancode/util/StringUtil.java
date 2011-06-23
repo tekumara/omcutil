@@ -18,18 +18,18 @@ public final class StringUtil {
 	 * @param functionName
 	 *            function names
 	 * @param args
-	 *            string args
+	 *            args
 	 * @return function call string
 	 */
-	public static String functionCall(String functionName, String... args) {
+	public static String functionCall(String functionName, Object... args) {
 		StringBuilder sb = new StringBuilder(64);
 
 		sb.append(functionName).append("(");
 		int i = 0;
 		for (; i < args.length - 1; i++) {
-			sb.append(args[i]).append(", ");
+			sb.append(args[i].toString()).append(", ");
 		}
-		sb.append(args[i]).append(")");
+		sb.append(args[i].toString()).append(")");
 		return sb.toString();
 	}
 
