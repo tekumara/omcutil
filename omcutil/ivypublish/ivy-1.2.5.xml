@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ivy-module version="2.0">
 
-	<info organisation="org.omancode" module="omcutil" revision="1.2.4" status="release" publication="20110901143041">
+	<info organisation="org.omancode" module="omcutil" revision="1.2.5" status="release" publication="20120117104130">
 		<license name="LGPL" url="http://www.gnu.org/licenses/lgpl.html"/>
 		<description homepage="http://code.google.com/p/omcutil/">
 		</description>
@@ -21,7 +21,7 @@
 
 	<dependencies>
         <dependency org="commons-lang" name="commons-lang" rev="2.6" revConstraint="latest.integration" conf="*->@"/>
-        <dependency org="commons-io" name="commons-io" rev="2.0.1" revConstraint="latest.integration" conf="*->@"/>
+        <dependency org="commons-io" name="commons-io" rev="2.1" revConstraint="latest.integration" conf="*->@"/>
         <dependency org="commons-beanutils" name="commons-beanutils" rev="1.8.3" revConstraint="latest.integration" conf="*->@"/>
     </dependencies>
 </ivy-module>

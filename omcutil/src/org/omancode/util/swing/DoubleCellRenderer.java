@@ -37,6 +37,7 @@ public class DoubleCellRenderer extends DefaultTableCellRenderer {
 	 */
 	public DoubleCellRenderer(int numberDigitsToDisplay) {
 		formatter.setMaximumFractionDigits(numberDigitsToDisplay);
+		formatter.setMinimumFractionDigits(numberDigitsToDisplay);
 		setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
 	}
 
