@@ -18,19 +18,19 @@
       <groupId>commons-lang</groupId>
       <artifactId>commons-lang</artifactId>
       <version>latest.integration</version>
-      <optional>true</optional>
+      <scope>compile</scope>
     </dependency>
     <dependency>
       <groupId>commons-io</groupId>
       <artifactId>commons-io</artifactId>
       <version>latest.integration</version>
-      <optional>true</optional>
+      <scope>compile</scope>
     </dependency>
     <dependency>
       <groupId>commons-beanutils</groupId>
       <artifactId>commons-beanutils</artifactId>
       <version>latest.integration</version>
-      <optional>true</optional>
+      <scope>compile</scope>
     </dependency>
   </dependencies>
 </project>
